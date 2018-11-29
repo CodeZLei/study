@@ -14,12 +14,11 @@ public class UserController {
 
 	@Resource(name="userServiceImpl")
 	private UserService userService;
-	
+
 	@RequestMapping("/findUser")
 	public String findUser(Model model) {
 		User user = userService.getUserById();
 		model.addAttribute("user", user);
 		return "user/findUser";
 	}
-
 }

@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById() {
-        User user = userDao.getUserById("00002");
+            User user = userDao.getUserById("00002");
 //		User user = new User();
 //		user.setId("123123");
 //		user.setName("账单");
