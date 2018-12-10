@@ -28,7 +28,7 @@ public class FlowController {
 
 	@Resource(name = "runtimeService")
 	private RuntimeService runtimeService;
-	
+
 	@Resource(name = "processEngineConfiguration")
 	private ProcessEngineConfiguration processEngineConfiguration;
 
@@ -40,8 +40,12 @@ public class FlowController {
 		ArrayList<String> highLightedFlowList = new ArrayList<>();
 
 		ProcessDiagramGenerator processDiagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
+		// InputStream imageStream =
+		// processDiagramGenerator.generateDiagram(bpmnModel, "png",
+		// activeActivityIdList,
+		// highLightedFlowList, "宋体", "宋体", null, 1.0);
 		InputStream imageStream = processDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIdList,
-				highLightedFlowList, "宋体", "宋体", null, 1.0);
+				highLightedFlowList, "宋体", "微软雅黑", "黑体", null, 2.0);
 
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(imageStream);
 
@@ -56,17 +60,22 @@ public class FlowController {
 	}
 
 	@RequestMapping("showActiveTaskInFlowImg")
-	public void showActiveTaskInFlowImg(HttpServletResponse response,String processInstanceId) throws IOException {
-		
-		ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-		
+	public void showActiveTaskInFlowImg(HttpServletResponse response, String processInstanceId) throws IOException {
+
+		ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+				.processInstanceId(processInstanceId).singleResult();
+
 		BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
 
 		List<String> activeActivityIdList = runtimeService.getActiveActivityIds(processInstanceId);
 		ProcessDiagramGenerator processDiagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
 		ArrayList<String> highLightedFlowList = new ArrayList<>();
+		// InputStream imageStream =
+		// processDiagramGenerator.generateDiagram(bpmnModel, "png",
+		// activeActivityIdList,
+		// highLightedFlowList, "宋体", "宋体", null, 1.0);
 		InputStream imageStream = processDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIdList,
-				highLightedFlowList, "宋体", "宋体", null, 1.0);
+				highLightedFlowList, "宋体", "微软雅黑", "黑体", null, 2.0);
 
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(imageStream);
 
