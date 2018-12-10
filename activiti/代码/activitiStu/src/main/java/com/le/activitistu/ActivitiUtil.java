@@ -3,7 +3,6 @@ package com.le.activitistu;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,19 +14,13 @@ import java.util.Map;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
+import org.activiti.engine.ManagementService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.PvmActivity;
-import org.activiti.engine.impl.pvm.PvmTransition;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
-import org.activiti.engine.impl.pvm.process.TransitionImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -37,10 +30,7 @@ import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.activiti.image.ProcessDiagramGenerator;
-import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.junit.Test;
-
-import com.mysql.jdbc.Buffer;
 
 public class ActivitiUtil {
 	private static ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -141,12 +131,21 @@ public class ActivitiUtil {
 	/**
 	 * 办理任务
 	 */
+	@Test
 	public void doTask() {
+		processEngine.getTaskService().claim("17504", "M003");
+
 		HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("flag", "Y");
+		hashMap.put("userCC", "usaer");
 		// //办理任务
-		processEngine.getTaskService().complete("10002", hashMap);
+		processEngine.getTaskService().complete("17504", hashMap);
 	}
+	
+	@Test
+	public void delete(){
+		 processEngine.getRuntimeService().deleteProcessInstance("2501","删除shili原因");
+	}
+	
 
 	/**
 	 * 流程表变量操作
@@ -181,7 +180,8 @@ public class ActivitiUtil {
 		ProcessEngineConfiguration processEngineConfiguration = processEngine.getProcessEngineConfiguration();
 		ProcessDiagramGenerator processDiagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
 		InputStream imageStream = processDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIdList,
-				highLightedFlowList, "宋体", "宋体", null, 1.0);
+				highLightedFlowList, "宋体", "微软雅黑", "黑体", null, 2.0);
+
 
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(imageStream);
 
@@ -209,8 +209,10 @@ public class ActivitiUtil {
 		ProcessEngineConfiguration processEngineConfiguration = processEngine.getProcessEngineConfiguration();
 		ProcessDiagramGenerator processDiagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
 		ArrayList<String> highLightedFlowList = new ArrayList<>();
+		
 		InputStream imageStream = processDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIdList,
-				highLightedFlowList, "宋体", "宋体", null, 1.0);
+				highLightedFlowList, "宋体", "微软雅黑", "黑体", null, 2.0);
+
 
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(imageStream);
 
@@ -230,6 +232,7 @@ public class ActivitiUtil {
 	 * 
 	 * @param taskId
 	 */
+	/*
 	public static void TaskRollBack(String taskId) {
 		try {
 			Map<String, Object> variables;
@@ -296,5 +299,25 @@ public class ActivitiUtil {
 
 			return;
 		}
-	}
+	}*/
+	
+	/**
+     * 跳转到指定流程节点
+     * 
+     * @param curTaskId
+     * @param targetFlowNodeId
+     *            指定的流程节点ID 比如跳转<endEvent id="endevent1" name="End"></endEvent> ，则targetFlowNodeId为endevent1
+     */
+    public void jump2TargetFlowNode(String curTaskId, String targetFlowNodeId) {
+		ManagementService managementService = processEngine.getManagementService();
+        managementService.executeCommand(new Jump2TargetFlowNodeCommand(curTaskId, targetFlowNodeId,""));
+    }
+    
+    @Test
+    public void testJump(){
+    	jump2TargetFlowNode("7504","AA");
+    }
+    
+	
+	
 }
