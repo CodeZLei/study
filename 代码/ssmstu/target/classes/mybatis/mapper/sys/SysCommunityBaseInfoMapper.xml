@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- 代码自动生成 sys_community_base_info 的mapper文件 -->
+<mapper namespace="com.le.ssm.dao.sys.SysCommunityBaseInfoMapper">
+
+	<!-- 参数映射 -->
+	<resultMap id="SysCommunityBaseInfoRM" type="com.le.ssm.domain.sys.SysCommunityBaseInfo">
+        <id property="id" column="id" javaType="String" jdbcType="VARCHAR"/>
+        <result property="comName" column="com_name" javaType="String" jdbcType="CHAR"/>
+        <result property="csCityCode" column="cs_city_code" javaType="String" jdbcType="CHAR"/>
+        <result property="cityName" column="city_name" javaType="String" jdbcType="VARCHAR"/>
+        <result property="districtCode" column="district_code" javaType="String" jdbcType="VARCHAR"/>
+        <result property="districtName" column="district_name" javaType="String" jdbcType="VARCHAR"/>
+        <result property="address" column="address" javaType="String" jdbcType="VARCHAR"/>
+        <result property="unitPrice" column="unit_price" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="ratioByLastMonthForPrice" column="ratio_by_last_month_for_price" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="ratioByLastYearForPrice" column="ratio_by_last_year_for_price" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="xlongitude" column="xlongitude" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="ylongitude" column="ylongitude" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="houseTypes" column="house_types" javaType="String" jdbcType="VARCHAR"/>
+        <result property="schoolDistrictHousing" column="school_district_housing" javaType="String" jdbcType="VARCHAR"/>
+        <result property="subwayDistrictHousing" column="subway_district_housing" javaType="String" jdbcType="VARCHAR"/>
+        <result property="completionDate" column="completion_date" javaType="String" jdbcType="VARCHAR"/>
+        <result property="buildingCategory" column="building_category" javaType="String" jdbcType="VARCHAR"/>
+        <result property="developerCompany" column="developer_company" javaType="String" jdbcType="VARCHAR"/>
+        <result property="sellDate" column="sell_date" javaType="String" jdbcType="VARCHAR"/>
+        <result property="buildingArea" column="building_area" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="landArea" column="land_area" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="landUseYearsLimit" column="land_use_years_limit" javaType="Integer" jdbcType="INTEGER"/>
+        <result property="greeningRate" column="greening_rate" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="managementCompany" column="management_company" javaType="String" jdbcType="VARCHAR"/>
+        <result property="managementFees" column="management_fees" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="parkingSpaceInfo" column="parking_space_info" javaType="String" jdbcType="VARCHAR"/>
+        <result property="school" column="school" javaType="String" jdbcType="VARCHAR"/>
+        <result property="subwayLine" column="subway_line" javaType="String" jdbcType="VARCHAR"/>
+        <result property="busLine" column="bus_line" javaType="String" jdbcType="VARCHAR"/>
+        <result property="sourceChannel" column="source_channel" javaType="String" jdbcType="CHAR"/>
+        <result property="status" column="status" javaType="String" jdbcType="CHAR"/>
+        <result property="createTime" column="create_time" javaType="Date" jdbcType="TIMESTAMP"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 表的所有字段 -->
+    <sql id="allColumns">
+        <![CDATA[
+            id,
+            com_name,
+            cs_city_code,
+            city_name,
+            district_code,
+            district_name,
+            address,
+            unit_price,
+            ratio_by_last_month_for_price,
+            ratio_by_last_year_for_price,
+            xlongitude,
+            ylongitude,
+            house_types,
+            school_district_housing,
+            subway_district_housing,
+            completion_date,
+            building_category,
+            developer_company,
+            sell_date,
+            building_area,
+            land_area,
+            land_use_years_limit,
+            greening_rate,
+            management_company,
+            management_fees,
+            parking_space_info,
+            school,
+            subway_line,
+            bus_line,
+            source_channel,
+            status,
+            create_time,
+            last_update_time
+        ]]>
+    </sql>
+
+    <!-- 表的主键字段 -->
+    <sql id="pkColumns">
+        <![CDATA[
+            id
+        ]]>
+    </sql>
+
+    <!-- 根据实体的查询对象进行查询的sql -->
+    <sql id="querySql">
+        select <include refid="allColumns" />
+            from sys_community_base_info
+            <where>
+                <if test="id != null and id != ''">
+                    <![CDATA[and id = #{id}]]>
+                </if>
+                <if test="comName != null and comName != ''">
+                    <![CDATA[and com_name = #{comName}]]>
+                </if>
+                <if test="csCityCode != null and csCityCode != ''">
+                    <![CDATA[and cs_city_code = #{csCityCode}]]>
+                </if>
+                <if test="cityName != null and cityName != ''">
+                    <![CDATA[and city_name = #{cityName}]]>
+                </if>
+                <if test="districtCode != null and districtCode != ''">
+                    <![CDATA[and district_code = #{districtCode}]]>
+                </if>
+                <if test="districtName != null and districtName != ''">
+                    <![CDATA[and district_name = #{districtName}]]>
+                </if>
+                <if test="address != null and address != ''">
+                    <![CDATA[and address = #{address}]]>
+                </if>
+                <if test="unitPrice != null">
+                    <![CDATA[and unit_price = #{unitPrice}]]>
+                </if>
+                <if test="unitPriceStart != null">
+                    <![CDATA[and unit_price >= #{unitPriceStart}]]>
+                </if>
+                <if test="unitPriceEnd != null">
+                    <![CDATA[and unit_price <= #{unitPriceEnd}]]>
+                </if>
+                <if test="ratioByLastMonthForPrice != null">
+                    <![CDATA[and ratio_by_last_month_for_price = #{ratioByLastMonthForPrice}]]>
+                </if>
+                <if test="ratioByLastMonthForPriceStart != null">
+                    <![CDATA[and ratio_by_last_month_for_price >= #{ratioByLastMonthForPriceStart}]]>
+                </if>
+                <if test="ratioByLastMonthForPriceEnd != null">
+                    <![CDATA[and ratio_by_last_month_for_price <= #{ratioByLastMonthForPriceEnd}]]>
+                </if>
+                <if test="ratioByLastYearForPrice != null">
+                    <![CDATA[and ratio_by_last_year_for_price = #{ratioByLastYearForPrice}]]>
+                </if>
+                <if test="ratioByLastYearForPriceStart != null">
+                    <![CDATA[and ratio_by_last_year_for_price >= #{ratioByLastYearForPriceStart}]]>
+                </if>
+                <if test="ratioByLastYearForPriceEnd != null">
+                    <![CDATA[and ratio_by_last_year_for_price <= #{ratioByLastYearForPriceEnd}]]>
+                </if>
+                <if test="xlongitude != null">
+                    <![CDATA[and xlongitude = #{xlongitude}]]>
+                </if>
+                <if test="xlongitudeStart != null">
+                    <![CDATA[and xlongitude >= #{xlongitudeStart}]]>
+                </if>
+                <if test="xlongitudeEnd != null">
+                    <![CDATA[and xlongitude <= #{xlongitudeEnd}]]>
+                </if>
+                <if test="ylongitude != null">
+                    <![CDATA[and ylongitude = #{ylongitude}]]>
+                </if>
+                <if test="ylongitudeStart != null">
+                    <![CDATA[and ylongitude >= #{ylongitudeStart}]]>
+                </if>
+                <if test="ylongitudeEnd != null">
+                    <![CDATA[and ylongitude <= #{ylongitudeEnd}]]>
+                </if>
+                <if test="houseTypes != null and houseTypes != ''">
+                    <![CDATA[and house_types = #{houseTypes}]]>
+                </if>
+                <if test="schoolDistrictHousing != null and schoolDistrictHousing != ''">
+                    <![CDATA[and school_district_housing = #{schoolDistrictHousing}]]>
+                </if>
+                <if test="subwayDistrictHousing != null and subwayDistrictHousing != ''">
+                    <![CDATA[and subway_district_housing = #{subwayDistrictHousing}]]>
+                </if>
+                <if test="completionDate != null and completionDate != ''">
+                    <![CDATA[and completion_date = #{completionDate}]]>
+                </if>
+                <if test="buildingCategory != null and buildingCategory != ''">
+                    <![CDATA[and building_category = #{buildingCategory}]]>
+                </if>
+                <if test="developerCompany != null and developerCompany != ''">
+                    <![CDATA[and developer_company = #{developerCompany}]]>
+                </if>
+                <if test="sellDate != null and sellDate != ''">
+                    <![CDATA[and sell_date = #{sellDate}]]>
+                </if>
+                <if test="buildingArea != null">
+                    <![CDATA[and building_area = #{buildingArea}]]>
+                </if>
+                <if test="buildingAreaStart != null">
+                    <![CDATA[and building_area >= #{buildingAreaStart}]]>
+                </if>
+                <if test="buildingAreaEnd != null">
+                    <![CDATA[and building_area <= #{buildingAreaEnd}]]>
+                </if>
+                <if test="landArea != null">
+                    <![CDATA[and land_area = #{landArea}]]>
+                </if>
+                <if test="landAreaStart != null">
+                    <![CDATA[and land_area >= #{landAreaStart}]]>
+                </if>
+                <if test="landAreaEnd != null">
+                    <![CDATA[and land_area <= #{landAreaEnd}]]>
+                </if>
+                <if test="landUseYearsLimit != null">
+                    <![CDATA[and land_use_years_limit = #{landUseYearsLimit}]]>
+                </if>
+                <if test="landUseYearsLimitStart != null">
+                    <![CDATA[and land_use_years_limit >= #{landUseYearsLimitStart}]]>
+                </if>
+                <if test="landUseYearsLimitEnd != null">
+                    <![CDATA[and land_use_years_limit <= #{landUseYearsLimitEnd}]]>
+                </if>
+                <if test="greeningRate != null">
+                    <![CDATA[and greening_rate = #{greeningRate}]]>
+                </if>
+                <if test="greeningRateStart != null">
+                    <![CDATA[and greening_rate >= #{greeningRateStart}]]>
+                </if>
+                <if test="greeningRateEnd != null">
+                    <![CDATA[and greening_rate <= #{greeningRateEnd}]]>
+                </if>
+                <if test="managementCompany != null and managementCompany != ''">
+                    <![CDATA[and management_company = #{managementCompany}]]>
+                </if>
+                <if test="managementFees != null">
+                    <![CDATA[and management_fees = #{managementFees}]]>
+                </if>
+                <if test="managementFeesStart != null">
+                    <![CDATA[and management_fees >= #{managementFeesStart}]]>
+                </if>
+                <if test="managementFeesEnd != null">
+                    <![CDATA[and management_fees <= #{managementFeesEnd}]]>
+                </if>
+                <if test="parkingSpaceInfo != null and parkingSpaceInfo != ''">
+                    <![CDATA[and parking_space_info = #{parkingSpaceInfo}]]>
+                </if>
+                <if test="school != null and school != ''">
+                    <![CDATA[and school = #{school}]]>
+                </if>
+                <if test="subwayLine != null and subwayLine != ''">
+                    <![CDATA[and subway_line = #{subwayLine}]]>
+                </if>
+                <if test="busLine != null and busLine != ''">
+                    <![CDATA[and bus_line = #{busLine}]]>
+                </if>
+                <if test="sourceChannel != null and sourceChannel != ''">
+                    <![CDATA[and source_channel = #{sourceChannel}]]>
+                </if>
+                <if test="status != null and status != ''">
+                    <![CDATA[and status = #{status}]]>
+                </if>
+                <if test="createTime != null">
+                    <![CDATA[and create_time = #{createTime}]]>
+                </if>
+                <if test="createTimeStart != null">
+                    <![CDATA[and create_time >= #{createTimeStart}]]>
+                </if>
+                <if test="createTimeEnd != null">
+                    <![CDATA[and create_time <= #{createTimeEnd}]]>
+                </if>
+                <if test="lastUpdateTime != null">
+                    <![CDATA[and last_update_time = #{lastUpdateTime}]]>
+                </if>
+                <if test="lastUpdateTimeStart != null">
+                    <![CDATA[and last_update_time >= #{lastUpdateTimeStart}]]>
+                </if>
+                <if test="lastUpdateTimeEnd != null">
+                    <![CDATA[and last_update_time <= #{lastUpdateTimeEnd}]]>
+                </if>
+            </where>
+    </sql>
+
+    <!-- 新增数据 -->
+    <insert id="insert" parameterType="com.le.ssm.domain.sys.SysCommunityBaseInfo">
+        <![CDATA[
+            insert into sys_community_base_info (
+                id,
+                com_name,
+                cs_city_code,
+                city_name,
+                district_code,
+                district_name,
+                address,
+                unit_price,
+                ratio_by_last_month_for_price,
+                ratio_by_last_year_for_price,
+                xlongitude,
+                ylongitude,
+                house_types,
+                school_district_housing,
+                subway_district_housing,
+                completion_date,
+                building_category,
+                developer_company,
+                sell_date,
+                building_area,
+                land_area,
+                land_use_years_limit,
+                greening_rate,
+                management_company,
+                management_fees,
+                parking_space_info,
+                school,
+                subway_line,
+                bus_line,
+                source_channel,
+                status,
+                create_time,
+                last_update_time
+            ) values (
+                #{id},
+                #{comName},
+                #{csCityCode},
+                #{cityName},
+                #{districtCode},
+                #{districtName},
+                #{address},
+                #{unitPrice},
+                #{ratioByLastMonthForPrice},
+                #{ratioByLastYearForPrice},
+                #{xlongitude},
+                #{ylongitude},
+                #{houseTypes},
+                #{schoolDistrictHousing},
+                #{subwayDistrictHousing},
+                #{completionDate},
+                #{buildingCategory},
+                #{developerCompany},
+                #{sellDate},
+                #{buildingArea},
+                #{landArea},
+                #{landUseYearsLimit},
+                #{greeningRate},
+                #{managementCompany},
+                #{managementFees},
+                #{parkingSpaceInfo},
+                #{school},
+                #{subwayLine},
+                #{busLine},
+                #{sourceChannel},
+                #{status},
+                #{createTime},
+                #{lastUpdateTime}
+            )
+        ]]>
+    </insert>
+
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteByPrimaryKey" parameterType="com.le.ssm.domain.sys.SysCommunityBaseInfo">
+        <![CDATA[
+            delete from sys_community_base_info
+                where
+                id = #{id}
+        ]]>
+    </delete>
+
+    <!-- 根据主键更新数据 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.le.ssm.domain.sys.SysCommunityBaseInfo">
+        update sys_community_base_info
+            <set>
+                <if test="comName != null"><![CDATA[com_name = #{comName},]]></if>
+                <if test="csCityCode != null"><![CDATA[cs_city_code = #{csCityCode},]]></if>
+                <if test="cityName != null"><![CDATA[city_name = #{cityName},]]></if>
+                <if test="districtCode != null"><![CDATA[district_code = #{districtCode},]]></if>
+                <if test="districtName != null"><![CDATA[district_name = #{districtName},]]></if>
+                <if test="address != null"><![CDATA[address = #{address},]]></if>
+                <if test="unitPrice != null"><![CDATA[unit_price = #{unitPrice},]]></if>
+                <if test="ratioByLastMonthForPrice != null"><![CDATA[ratio_by_last_month_for_price = #{ratioByLastMonthForPrice},]]></if>
+                <if test="ratioByLastYearForPrice != null"><![CDATA[ratio_by_last_year_for_price = #{ratioByLastYearForPrice},]]></if>
+                <if test="xlongitude != null"><![CDATA[xlongitude = #{xlongitude},]]></if>
+                <if test="ylongitude != null"><![CDATA[ylongitude = #{ylongitude},]]></if>
+                <if test="houseTypes != null"><![CDATA[house_types = #{houseTypes},]]></if>
+                <if test="schoolDistrictHousing != null"><![CDATA[school_district_housing = #{schoolDistrictHousing},]]></if>
+                <if test="subwayDistrictHousing != null"><![CDATA[subway_district_housing = #{subwayDistrictHousing},]]></if>
+                <if test="completionDate != null"><![CDATA[completion_date = #{completionDate},]]></if>
+                <if test="buildingCategory != null"><![CDATA[building_category = #{buildingCategory},]]></if>
+                <if test="developerCompany != null"><![CDATA[developer_company = #{developerCompany},]]></if>
+                <if test="sellDate != null"><![CDATA[sell_date = #{sellDate},]]></if>
+                <if test="buildingArea != null"><![CDATA[building_area = #{buildingArea},]]></if>
+                <if test="landArea != null"><![CDATA[land_area = #{landArea},]]></if>
+                <if test="landUseYearsLimit != null"><![CDATA[land_use_years_limit = #{landUseYearsLimit},]]></if>
+                <if test="greeningRate != null"><![CDATA[greening_rate = #{greeningRate},]]></if>
+                <if test="managementCompany != null"><![CDATA[management_company = #{managementCompany},]]></if>
+                <if test="managementFees != null"><![CDATA[management_fees = #{managementFees},]]></if>
+                <if test="parkingSpaceInfo != null"><![CDATA[parking_space_info = #{parkingSpaceInfo},]]></if>
+                <if test="school != null"><![CDATA[school = #{school},]]></if>
+                <if test="subwayLine != null"><![CDATA[subway_line = #{subwayLine},]]></if>
+                <if test="busLine != null"><![CDATA[bus_line = #{busLine},]]></if>
+                <if test="sourceChannel != null"><![CDATA[source_channel = #{sourceChannel},]]></if>
+                <if test="status != null"><![CDATA[status = #{status},]]></if>
+                <if test="createTime != null"><![CDATA[create_time = #{createTime},]]></if>
+                <if test="lastUpdateTime != null"><![CDATA[last_update_time = #{lastUpdateTime},]]></if>
+            </set>
+        where
+                id = #{id}
+    </update>
+    <!-- 根据主键查询对象 -->
+    <select id="selectByPrimaryKey" parameterType="com.le.ssm.domain.sys.SysCommunityBaseInfo" resultMap="SysCommunityBaseInfoRM">
+        select <include refid="allColumns" />
+        <![CDATA[
+            from sys_community_base_info
+            where
+                id = #{id}
+        ]]>
+    </select>
+
+    <!-- 根据实体对象查询数据结果集 -->
+    <select id="selectByEntityQuery" parameterType="com.le.ssm.domain.sys.query.SysCommunityBaseInfoQuery" resultMap="SysCommunityBaseInfoRM">
+        <include refid="querySql"/>
+        <if test="sortColumns != null and sortColumns != ''">
+            order by ${sortColumns}
+        </if>
+    </select>
+
+</mapper>
